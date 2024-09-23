@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5052214328961502155
+--- !u!114 &-1499977852112862967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: Dialog
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -152, y: -40}
+  position: {x: -152, y: -56}
   ports:
-    keys: []
-    values: []
-  chatList:
-  - name: 0
-    content: 
-    dialogs:
-    - 
-    chatType: 0
-    icon: {fileID: 0}
+    keys:
+    - input
+    values:
+    - _fieldName: input
+      _node: {fileID: -1499977852112862967}
+      _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 5849822831064647218}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  chatList: []
+  singlePersonName:
+  - asd
+  - gfh
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,7 +48,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 9212318884835560395}
-  - {fileID: -5052214328961502155}
+  - {fileID: -1499977852112862967}
+  - {fileID: 5849822831064647218}
+--- !u!114 &5849822831064647218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddcae034fe545ea9b9a6a220e6dc959, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -472, y: -24}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 5849822831064647218}
+      _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: -1499977852112862967}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  typeSound: {fileID: 0}
 --- !u!114 &9212318884835560395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,7 +94,7 @@ MonoBehaviour:
   m_Name: Asset
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -168, y: -200}
+  position: {x: -328, y: -184}
   ports:
     keys: []
     values: []

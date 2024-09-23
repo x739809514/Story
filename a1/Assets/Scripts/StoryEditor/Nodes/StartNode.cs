@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using XNode;
 
+[CreateNodeMenu("StartNode")]
+[NodeWidth(200)]
+
+[NodeTint(255,255,60)]//Node颜色
 public class StartNode : Node
 {
+    [Output] public Empty output;
+    
     public AudioClip typeSound;
     public override object GetValue(NodePort port)
     {

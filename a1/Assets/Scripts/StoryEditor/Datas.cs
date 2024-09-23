@@ -39,8 +39,6 @@ public class SinglePersonChat
 {
     public int name;
     public string content;
-    [SerializeField]
-    public List<string> dialogs;
     public ChatType chatType;
     public Sprite icon;
 }

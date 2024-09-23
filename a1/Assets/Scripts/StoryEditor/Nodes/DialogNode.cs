@@ -2,9 +2,16 @@
 using UnityEngine;
 using XNode;
 
+[CreateNodeMenu("DialogNode")]
+[NodeWidth(400)]
+[NodeTint(73,236,209)]
 public class DialogNode : Node
 {
-    public List<SinglePersonChat> chatList;
+    [Input]
+    public Empty input;
+    
+    public List<SinglePersonChat> chatList = new List<SinglePersonChat>();
+    public List<string> singlePersonName = new List<string>();
 
     public override object GetValue(NodePort port)
     {
@@ -73,9 +80,9 @@ public class DialogNode : Node
                         break;
                 }
 
-                var bb = chatList[i].dialogs;
+                var bb = chatList[i].content;
                 var head = chatList[i].icon;
-                var character = chatList[i].name;
+                var character = singlePersonName[chatList[i].name];
                 EventHandle.DispatchEvent(EventName.EvtDialogExecute, cType, bb, head, character);
                 return temp;
             }
