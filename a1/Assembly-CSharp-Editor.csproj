@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\StoryEditor\Editor\DialogNodeEditor.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Editor\SelectNodeEditor.cs" />
+     <Compile Include="Assets\Scripts\StoryEditor\Editor\AssetNodeEditor.cs" />
      <Folder Include="Assets\Scripts\StoryEditor\Editor" />
      <Reference Include="UnityEngine">
      <HintPath>D:\Unity\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

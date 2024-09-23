@@ -1,7 +1,7 @@
 ﻿using XNodeEditor;
 
-[CustomNodeEditor(typeof(SelectNode))]
-public class SelectNodeEditor : NodeEditor
+[CustomNodeEditor(typeof(AssetNodeEditor))]
+public class AssetNodeEditor : NodeEditor
 {
     public override void OnHeaderGUI()
     {

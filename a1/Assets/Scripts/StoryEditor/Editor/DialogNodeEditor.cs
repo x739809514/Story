@@ -40,7 +40,7 @@ public class DialogNodeEditor : NodeEditor
         // 绘制列表头
         list.drawHeaderCallback = (Rect rect) =>
         {
-            string title = "对话列表";
+            string title = "Dialog List";
             GUI.Label(rect, title);
         };
 

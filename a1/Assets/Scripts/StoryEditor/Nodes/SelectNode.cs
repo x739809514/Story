@@ -2,11 +2,14 @@
 using UnityEngine;
 using XNode;
 
+[CreateNodeMenu("OptionNode")]
+[NodeWidth(400)]
+
 public class SelectNode : Node
 {
     [Input] public Empty input;
-    [Output] public Empty output;
-    [SerializeField] public List<string> selections;
+    [Output(dynamicPortList =true )]
+    public List<string> selections;
 
     public override object GetValue(NodePort port)
     {
@@ -20,7 +23,7 @@ public class SelectNode : Node
         foreach (var output in DynamicOutputs)
         {
             Debug.Log(output.fieldName);
-            if (output.fieldName == "select " + index)
+            if (output.fieldName == "selections " + index)
             {
                 if (output.IsConnected)
                 {
