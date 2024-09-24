@@ -1235,7 +1235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16918a49a5564263983c9898c8e95162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelStory: {fileID: 319098585}
   graph: {fileID: 11400000, guid: fe234a5a446e0dd44812ad721a075988, type: 2}
 --- !u!1 &963194225
 GameObject:

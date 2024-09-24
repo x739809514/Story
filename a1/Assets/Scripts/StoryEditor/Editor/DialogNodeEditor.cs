@@ -94,7 +94,7 @@ public class DialogNodeEditor : NodeEditor
 
                 typeProperty.enumValueIndex = (int)ty;
             }
-            else if (dialogNode.chatList[index].chatType == ChatType.Option)
+            else if (dialogNode.chatList[index].chatType == ChatType.Option || dialogNode.chatList[index].chatType == ChatType.GoNext)
             {
                 Rect typeRect = new Rect(position)
                 {
@@ -174,13 +174,13 @@ public class DialogNodeEditor : NodeEditor
                 }
                 SerializedProperty itemData = arrayData.GetArrayElementAtIndex(index);
 
-                if (dialogNode.chatList[index].chatType == ChatType.CEvent || dialogNode.chatList[index].chatType == ChatType.Option)
+                if (dialogNode.chatList[index].chatType == ChatType.Normal || dialogNode.chatList[index].chatType == ChatType.Null)
                 {
-                    return EditorGUI.GetPropertyHeight(itemData) + 12;
+                    return EditorGUI.GetPropertyHeight(itemData) + 54;
                 }
 
                 //return EditorGUIUtility.singleLineHeight + 36;
-                return EditorGUI.GetPropertyHeight(itemData)+54;
+                return EditorGUI.GetPropertyHeight(itemData)+12;
             }
             else return EditorGUIUtility.singleLineHeight;
         };

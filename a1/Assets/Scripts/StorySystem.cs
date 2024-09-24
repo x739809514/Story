@@ -24,6 +24,7 @@ public class StorySystem : MonoBehaviour
     public Action moveToDialogEndHandler;
     public Action<SinglePersonChat, string> updateDialogHandler;
     public Action<List<string>> updateOptionsHandler;
+    public Action<Sprite, AudioClip> updateBackgroundHandler;
 
 
 #region life cycle
@@ -60,6 +61,9 @@ public class StorySystem : MonoBehaviour
                     break;
                 case Current.Select:
                     PlaySelectNode();
+                    break;
+                case Current.Background:
+                    PlayBackGroundNode();
                     break;
             }
         }
@@ -108,6 +112,11 @@ public class StorySystem : MonoBehaviour
         }
 
         curNode = dialogNode.MoveNext(index, out current);
+        
+        if (index == dialogNode.chatList.Count - 1)
+        {
+            curDialogIndex = 0;
+        }
     }
 
     private void UpdateDialog(SinglePersonChat detail, string personName)
@@ -128,16 +137,9 @@ public class StorySystem : MonoBehaviour
 
         // 处理UI部分
         updateDialogHandler?.Invoke(detail, personName);
-
-        switch (type)
+        if (type == ChatType.Normal)
         {
-            case ChatType.Normal:
-                curDialogIndex++;
-                break;
-            case ChatType.Option:
-            case ChatType.GoNext:
-                curDialogIndex = 0;
-                break;
+            curDialogIndex++;
         }
     }
 
@@ -173,6 +175,22 @@ public class StorySystem : MonoBehaviour
         }
     }
 
+    private void PlayBackGroundNode()
+    {
+        if (curNode is BackGroundNode backGroundNode)
+        {
+            updateBackgroundHandler?.Invoke(backGroundNode.img, backGroundNode.bgm);
+            // execute next node
+            curNode = backGroundNode.MoveNext(out current);
+        }
+        else
+        {
+            curState = State.Pause;
+            Debug.LogError("curNode is not BackGroundNode, curNode is " + curNode.name + " current is " +
+                           nameof(current));
+        }
+    }
+
 #endregion
 
 
@@ -189,6 +207,7 @@ public class StorySystem : MonoBehaviour
             }
         }
 
+        curDialogIndex = 0;
         curState = State.Play;
     }
 

@@ -4,7 +4,7 @@ using XNode;
 [CreateNodeMenu("StartNode")]
 [NodeWidth(200)]
 
-[NodeTint(255,255,60)]//Node颜色
+[NodeTint(152,15,32)]//Node颜色
 public class StartNode : Node
 {
     [Output] public Empty output;
@@ -41,6 +41,13 @@ public class StartNode : Node
         {
             current = Current.Select;
             return sNode;
+        }
+        
+        BackGroundNode bNode = temp as BackGroundNode;
+        if (bNode!=null)
+        {
+            current = Current.Background;
+            return bNode;
         }
 
         return temp;

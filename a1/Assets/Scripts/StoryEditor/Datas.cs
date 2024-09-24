@@ -7,6 +7,7 @@ public enum Current
     Start,
     Dialog,
     Select,
+    Background,
 }
 
 public enum ChatType

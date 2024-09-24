@@ -4,7 +4,7 @@ using XNode;
 
 [CreateNodeMenu("OptionNode")]
 [NodeWidth(400)]
-
+[NodeTint(88,43,142)]
 public class SelectNode : Node
 {
     [Input] public Empty input;
@@ -37,6 +37,11 @@ public class SelectNode : Node
                     {
                         temp = selectNode;
                         current = Current.Select;
+                    }
+                    else if (nextNode is BackGroundNode backGroundNode)
+                    {
+                        temp = backGroundNode;
+                        current = Current.Background;
                     }
                 }
             }

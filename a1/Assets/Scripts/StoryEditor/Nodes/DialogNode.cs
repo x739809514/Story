@@ -4,7 +4,7 @@ using XNode;
 
 [CreateNodeMenu("DialogNode")]
 [NodeWidth(400)]
-[NodeTint(73, 236, 209)]
+[NodeTint(0, 82, 176)]
 public class DialogNode : Node
 {
     [Input] public Empty input;
@@ -70,17 +70,21 @@ public class DialogNode : Node
                             {
                                 if (port.IsConnected)
                                 {
-                                    if (temp is DialogNode node)
+                                    if (port.Connection.node is DialogNode node)
                                     {
                                         temp = node;
                                         current = Current.Dialog;
+                                    }
+                                    else if (port.Connection.node is BackGroundNode bNode)
+                                    {
+                                        temp = bNode;
+                                        current = Current.Background;
                                     }
                                 }
 
                                 return temp;
                             }
                         }
-
                         break;
                 }
 
