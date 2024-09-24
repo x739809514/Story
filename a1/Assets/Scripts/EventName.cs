@@ -2,4 +2,5 @@
 {
     EvtDialog,
     EvtDialogExecute,
+    EvtOptionClick,
 }
