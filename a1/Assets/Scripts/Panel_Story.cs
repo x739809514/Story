@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -12,14 +12,27 @@ public class Panel_Story : MonoBehaviour
     public Image bgImg;
     public Image roleLeft;
     public Image roleRight;
+    public Button btnNext;
     public TextMeshProUGUI nameLeft;
     public TextMeshProUGUI nameRight;
     public TextMeshProUGUI dialogContent;
     public Transform optionsParent;
 
+    public Transform gameManager;
+
     private float typeSpeed = 0.1f;
     private WaitForSeconds typeTime;
     private List<GameObject> optionList;
+    private StorySystem storySystem;
+    private Coroutine typeCor;
+    private string curDialogContent;
+
+    private void Awake()
+    {
+        storySystem = gameManager.GetComponent<StorySystem>();
+        storySystem.MoveToDialogEndHandler += DoMoveToDialogEnd;
+        btnNext.onClick.AddListener(OnGoNextClick);
+    }
 
     public void UpdateDialog(SinglePersonChat data, string personName)
     {
@@ -44,13 +57,14 @@ public class Panel_Story : MonoBehaviour
         }
 
         typeTime = new WaitForSeconds(typeSpeed);
-        StartCoroutine(TypeWords(data.content));
+        typeCor = StartCoroutine(TypeWords(data.content));
     }
 
     IEnumerator TypeWords(string content)
     {
         var curPos = 0;
         var len = content.Length;
+        curDialogContent = content;
         StringBuilder sb = new StringBuilder("");
         while (curPos < content.Length)
         {
@@ -65,6 +79,8 @@ public class Panel_Story : MonoBehaviour
 
     public void UpdateOptions(List<string> options)
     {
+        // forbidden dialog click
+        btnNext.interactable = false;
         optionsParent.gameObject.SetActive(true);
         optionList ??= new List<GameObject>();
         for (int i = 0; i < options.Count; i++)
@@ -74,12 +90,9 @@ public class Panel_Story : MonoBehaviour
             go.SetActive(true);
             go.transform.Find("txt").GetComponent<TextMeshProUGUI>().text = options[i];
             go.GetComponent<Button>().onClick.RemoveAllListeners();
-            
+
             var i1 = i;
-            go.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                OnOptionClick(i1);
-            });
+            go.GetComponent<Button>().onClick.AddListener(() => { OnOptionClick(i1); });
             optionList.Add(go);
         }
     }
@@ -90,8 +103,27 @@ public class Panel_Story : MonoBehaviour
         {
             Destroy(o);
         }
+
         optionList.Clear();
         optionsParent.gameObject.SetActive(false);
+        btnNext.interactable = true;
         EventHandle.DispatchEvent<int>(EventName.EvtOptionClick, index);
+    }
+
+    private void DoMoveToDialogEnd()
+    {
+        StopCoroutine(typeCor);
+        dialogContent.text = curDialogContent;
+    }
+
+    private void OnGoNextClick()
+    {
+        EventHandle.DispatchEvent(EventName.EvtDialogClick);
+    }
+
+    private void OnDestroy()
+    {
+        storySystem.MoveToDialogEndHandler -= DoMoveToDialogEnd;
+        btnNext.onClick.RemoveAllListeners();
     }
 }

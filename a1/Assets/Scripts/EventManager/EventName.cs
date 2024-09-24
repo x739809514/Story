@@ -11,4 +11,6 @@
     /// option click event
     /// </summary>
     EvtOptionClick,
+    
+    EvtDialogClick
 }

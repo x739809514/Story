@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using XNode;
 using Debug = UnityEngine.Debug;
@@ -11,17 +12,22 @@ public class StorySystem : MonoBehaviour
     private State curState;
     private Current current;
     private Node curNode;
-    private int curDialogIndex; // 当前播放当第几段对话
+    private int curDialogIndex; // 当前播放到第几段对话
 
     private float chatSpeed = 0.15f;
     private WaitForSeconds chatTimer;
-    private bool auto;
-    private bool toNext;
+    private bool auto; // 自动播放
+    private bool toNext; // 点击显示完成对话内容
+
+    public Action MoveToDialogEndHandler;
+    public Action<SinglePersonChat, string> UpdateDialogHanler;
+    public Action<int> UpdateOptionsHandler;
 
     private void Start()
     {
         EventHandle.AddEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
         EventHandle.AddEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
+        EventHandle.AddEvent(EventName.EvtDialogClick, OnDialogClick);
         InitNode();
     }
 
@@ -41,11 +47,6 @@ public class StorySystem : MonoBehaviour
                     PlaySelectNode();
                     break;
             }
-        }
-
-        if (Input.GetMouseButtonDown(0) && toNext)
-        {
-            curState = State.Play;
         }
     }
 
@@ -95,12 +96,13 @@ public class StorySystem : MonoBehaviour
             Debug.LogError("curNode is not DialogNode, curNode is " + curNode.name + " current is " + nameof(current));
             return;
         }
-
+        
         curNode = dialogNode.MoveNext(index, out current);
     }
 
     private void UpdateDialog(SinglePersonChat detail, string personName)
     {
+        toNext = false;
         // 暂停状态，处理对话播放
         curState = State.Pause;
         // 开始一个计时器，计时结束后回到播放状态
@@ -183,6 +185,19 @@ public class StorySystem : MonoBehaviour
         yield return null;
     }
 
+    private void OnDialogClick()
+    {
+        if (toNext)
+        {
+            curState = State.Play;
+        }
+        else
+        {
+            MoveToDialogEndHandler?.Invoke();
+            toNext = true;
+        }
+    }
+
 #endregion
 
 
@@ -190,6 +205,7 @@ public class StorySystem : MonoBehaviour
     {
         EventHandle.RemoveEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
         EventHandle.RemoveEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
+        EventHandle.RemoveEvent(EventName.EvtDialogClick, OnDialogClick);
     }
 }
 
