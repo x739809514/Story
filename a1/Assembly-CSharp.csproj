@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\StoryEditor\Datas.cs" />
-     <Compile Include="Assets\Scripts\EventName.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\DialogNode.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\AssetNode.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\StoryGraph.cs" />
@@ -55,10 +54,11 @@
      <Compile Include="Assets\Scripts\StoryEditor\Empty.cs" />
      <Compile Include="Assets\Scripts\StorySystem.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\EventHandle.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\SelectNode.cs" />
+     <Compile Include="Assets\Scripts\EventManager\EventHandle.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\StartNode.cs" />
+     <Compile Include="Assets\Scripts\EventManager\EventName.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -76,9 +76,11 @@
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+     <Folder Include="Assets\Scripts\EventManager" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+     <Folder Include="Assets\Resources\perfabs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\ThirdParty\xNode-master\package.json" />
      <Folder Include="Assets\TextMesh Pro\Shaders" />
