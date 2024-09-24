@@ -13,13 +13,15 @@ public class StorySystem : MonoBehaviour
     private Node curNode;
     private int curDialogIndex; // 当前播放当第几段对话
 
-    private float chatSpeed = 0.1f;
+    private float chatSpeed = 0.15f;
     private WaitForSeconds chatTimer;
+    private bool auto;
+    private bool toNext;
 
     private void Start()
     {
         EventHandle.AddEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
-        EventHandle.AddEvent<int>(EventName.EvtOptionClick,OnOptionsClick);
+        EventHandle.AddEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
         InitNode();
     }
 
@@ -39,6 +41,11 @@ public class StorySystem : MonoBehaviour
                     PlaySelectNode();
                     break;
             }
+        }
+
+        if (Input.GetMouseButtonDown(0) && toNext)
+        {
+            curState = State.Play;
         }
     }
 
@@ -75,7 +82,7 @@ public class StorySystem : MonoBehaviour
         else
         {
             curState = State.Pause;
-            Debug.LogError("curNode is not startNode, curNode is "+ curNode.name + " current is " + nameof(current));
+            Debug.LogError("curNode is not startNode, curNode is " + curNode.name + " current is " + nameof(current));
         }
     }
 
@@ -85,7 +92,7 @@ public class StorySystem : MonoBehaviour
         if (dialogNode == null)
         {
             curState = State.Pause;
-            Debug.LogError("curNode is not DialogNode, curNode is "+ curNode.name + " current is " + nameof(current));
+            Debug.LogError("curNode is not DialogNode, curNode is " + curNode.name + " current is " + nameof(current));
             return;
         }
 
@@ -128,13 +135,13 @@ public class StorySystem : MonoBehaviour
         if (selectNode == null)
         {
             curState = State.Pause;
-            Debug.LogError("curNode is not SelectNode, curNode is "+ curNode.name + " current is " + nameof(current));
+            Debug.LogError("curNode is not SelectNode, curNode is " + curNode.name + " current is " + nameof(current));
             return;
         }
 
         var options = selectNode.selections;
         panelStory.UpdateOptions(options);
-        
+
         // pause, waiting for players' choice
         curState = State.Pause;
     }
@@ -151,7 +158,7 @@ public class StorySystem : MonoBehaviour
         }
         else
         {
-            Debug.LogError("curNode is not SelectNode, curNode is "+ curNode.name + " current is " + nameof(current) );
+            Debug.LogError("curNode is not SelectNode, curNode is " + curNode.name + " current is " + nameof(current));
         }
     }
 
@@ -163,7 +170,16 @@ public class StorySystem : MonoBehaviour
     IEnumerator SetDialogTimer()
     {
         yield return chatTimer;
-        curState = State.Play;
+        // auto
+        if (auto)
+        {
+            curState = State.Play;
+        }
+        else
+        {
+            toNext = true;
+        }
+
         yield return null;
     }
 
@@ -173,7 +189,7 @@ public class StorySystem : MonoBehaviour
     private void OnDestroy()
     {
         EventHandle.RemoveEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
-        EventHandle.RemoveEvent<int>(EventName.EvtOptionClick,OnOptionsClick);
+        EventHandle.RemoveEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
     }
 }
 
