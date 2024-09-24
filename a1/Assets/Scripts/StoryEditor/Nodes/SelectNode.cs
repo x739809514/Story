@@ -22,7 +22,7 @@ public class SelectNode : Node
         current = Current.Select;
         foreach (var output in DynamicOutputs)
         {
-            Debug.Log(output.fieldName);
+            //Debug.Log(output.fieldName);
             if (output.fieldName == "selections " + index)
             {
                 if (output.IsConnected)

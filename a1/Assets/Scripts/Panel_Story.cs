@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -23,18 +22,18 @@ public class Panel_Story : MonoBehaviour
     private float typeSpeed = 0.1f;
     private WaitForSeconds typeTime;
     private List<GameObject> optionList;
-    private StorySystem storySystem;
     private Coroutine typeCor;
     private string curDialogContent;
 
     private void Awake()
     {
-        storySystem = gameManager.GetComponent<StorySystem>();
-        storySystem.MoveToDialogEndHandler += DoMoveToDialogEnd;
+        StorySystem.Instance.moveToDialogEndHandler += DoMoveToDialogEnd;
+        StorySystem.Instance.updateDialogHandler += UpdateDialog;
+        StorySystem.Instance.updateOptionsHandler += UpdateOptions;
         btnNext.onClick.AddListener(OnGoNextClick);
     }
 
-    public void UpdateDialog(SinglePersonChat data, string personName)
+    private void UpdateDialog(SinglePersonChat data, string personName)
     {
         var pos = data.pos;
         roleLeft.gameObject.SetActive(false);
@@ -77,7 +76,7 @@ public class Panel_Story : MonoBehaviour
         dialogContent.text = content;
     }
 
-    public void UpdateOptions(List<string> options)
+    private void UpdateOptions(List<string> options)
     {
         // forbidden dialog click
         btnNext.interactable = false;
@@ -123,7 +122,9 @@ public class Panel_Story : MonoBehaviour
 
     private void OnDestroy()
     {
-        storySystem.MoveToDialogEndHandler -= DoMoveToDialogEnd;
+        StorySystem.Instance.moveToDialogEndHandler -= DoMoveToDialogEnd;
+        StorySystem.Instance.updateDialogHandler -= UpdateDialog;
+        StorySystem.Instance.updateOptionsHandler -= UpdateOptions;
         btnNext.onClick.RemoveAllListeners();
     }
 }

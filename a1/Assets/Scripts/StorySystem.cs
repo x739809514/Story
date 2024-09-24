@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using XNode;
 using Debug = UnityEngine.Debug;
@@ -7,7 +8,7 @@ using Debug = UnityEngine.Debug;
 public class StorySystem : MonoBehaviour
 {
     // Fields
-    public Panel_Story panelStory;
+    public static StorySystem Instance;
     public StoryGraph graph;
     private State curState;
     private Current current;
@@ -19,9 +20,23 @@ public class StorySystem : MonoBehaviour
     private bool auto; // 自动播放
     private bool toNext; // 点击显示完成对话内容
 
-    public Action MoveToDialogEndHandler;
-    public Action<SinglePersonChat, string> UpdateDialogHanler;
-    public Action<int> UpdateOptionsHandler;
+    // 对外API
+    public Action moveToDialogEndHandler;
+    public Action<SinglePersonChat, string> updateDialogHandler;
+    public Action<List<string>> updateOptionsHandler;
+
+
+#region life cycle
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance);
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -50,19 +65,14 @@ public class StorySystem : MonoBehaviour
         }
     }
 
-    private void InitNode()
+    private void OnDestroy()
     {
-        foreach (var node in graph.nodes)
-        {
-            if (node is StartNode n)
-            {
-                curNode = n;
-                current = Current.Start;
-            }
-        }
-
-        curState = State.Play;
+        EventHandle.RemoveEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
+        EventHandle.RemoveEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
+        EventHandle.RemoveEvent(EventName.EvtDialogClick, OnDialogClick);
     }
+
+#endregion
 
 
 #region run nodes
@@ -96,7 +106,7 @@ public class StorySystem : MonoBehaviour
             Debug.LogError("curNode is not DialogNode, curNode is " + curNode.name + " current is " + nameof(current));
             return;
         }
-        
+
         curNode = dialogNode.MoveNext(index, out current);
     }
 
@@ -117,7 +127,7 @@ public class StorySystem : MonoBehaviour
         }
 
         // 处理UI部分
-        panelStory.UpdateDialog(detail, personName);
+        updateDialogHandler?.Invoke(detail, personName);
 
         switch (type)
         {
@@ -142,7 +152,7 @@ public class StorySystem : MonoBehaviour
         }
 
         var options = selectNode.selections;
-        panelStory.UpdateOptions(options);
+        updateOptionsHandler?.Invoke(options);
 
         // pause, waiting for players' choice
         curState = State.Pause;
@@ -150,7 +160,6 @@ public class StorySystem : MonoBehaviour
 
     private void OnOptionsClick(int index)
     {
-        Debug.Log("进来了");
         // move to next node
         if (curNode is SelectNode selectNode)
         {
@@ -168,6 +177,20 @@ public class StorySystem : MonoBehaviour
 
 
 #region Method
+
+    private void InitNode()
+    {
+        foreach (var node in graph.nodes)
+        {
+            if (node is StartNode n)
+            {
+                curNode = n;
+                current = Current.Start;
+            }
+        }
+
+        curState = State.Play;
+    }
 
     IEnumerator SetDialogTimer()
     {
@@ -193,20 +216,12 @@ public class StorySystem : MonoBehaviour
         }
         else
         {
-            MoveToDialogEndHandler?.Invoke();
+            moveToDialogEndHandler?.Invoke();
             toNext = true;
         }
     }
 
 #endregion
-
-
-    private void OnDestroy()
-    {
-        EventHandle.RemoveEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
-        EventHandle.RemoveEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
-        EventHandle.RemoveEvent(EventName.EvtDialogClick, OnDialogClick);
-    }
 }
 
 public enum State
