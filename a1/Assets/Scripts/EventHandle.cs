@@ -62,6 +62,11 @@ public class EventHandle
         CommonAdd(eventName, callback);
     }
 
+    public static void AddEvent<T, T1, T2, T3, T4>(EventName eventName, Action<T, T1, T2, T3, T4> callback)
+    {
+        CommonAdd(eventName, callback);
+    }
+
 #endregion
 
 
@@ -104,6 +109,11 @@ public class EventHandle
     }
 
     public static void RemoveEvent<T, T1, T2, T3>(EventName eventName, Action<T, T1, T2, T3> callback)
+    {
+        CommonRemove(eventName, callback);
+    }
+
+    public static void RemoveEvent<T, T1, T2, T3, T4>(EventName eventName, Action<T, T1, T2, T3, T4> callback)
     {
         CommonRemove(eventName, callback);
     }
@@ -208,6 +218,25 @@ public class EventHandle
                 if (act is Action<T, T1, T2, T3> action)
                 {
                     action.Invoke(arg, arg1, arg2, arg3);
+                }
+                //act.DynamicInvoke(arg, arg1, arg2,arg3);
+            }
+        }
+    }
+
+    public static void DispatchEvent<T, T1, T2, T3, T4>(EventName eventName, T arg, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+    {
+        List<Delegate> actions = null;
+
+        if (events.ContainsKey(eventName))
+        {
+            events.TryGetValue(eventName, out actions);
+
+            foreach (var act in actions)
+            {
+                if (act is Action<T, T1, T2, T3, T4> action)
+                {
+                    action.Invoke(arg, arg1, arg2, arg3, arg4);
                 }
                 //act.DynamicInvoke(arg, arg1, arg2,arg3);
             }

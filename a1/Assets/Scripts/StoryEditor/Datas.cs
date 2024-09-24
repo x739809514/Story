@@ -34,6 +34,12 @@ public enum ChatType
     GoNext
 }
 
+public enum RolePos
+{
+    Left,
+    Right
+}
+
 [System.Serializable]
 public class SinglePersonChat
 {
@@ -41,4 +47,5 @@ public class SinglePersonChat
     public string content;
     public ChatType chatType;
     public Sprite icon;
+    public RolePos pos;
 }

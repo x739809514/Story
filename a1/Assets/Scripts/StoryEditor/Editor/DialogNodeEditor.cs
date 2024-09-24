@@ -94,39 +94,58 @@ public class DialogNodeEditor : NodeEditor
 
                 typeProperty.enumValueIndex = (int)ty;
             }
+            else if (dialogNode.chatList[index].chatType == ChatType.Option)
+            {
+                Rect typeRect = new Rect(position)
+                {
+                    width = 130,
+                    y = position.y + 5,
+                    height = 20
+                };
+                SerializedProperty typeProperty = itemData.FindPropertyRelative("chatType");
+                typeProperty.enumValueIndex = (int)(ChatType)EditorGUI.EnumPopup(typeRect, dialogNode.chatList[index].chatType);
+            }
             else
             {
                 Rect iconRect = new Rect(position)
                 {
                     width = 50,
                     height = 50,
-                    y=position.y+5
+                    y=position.y+8
                 };
 
                 Rect nameTypeRect = new Rect(position)
                 {
                     width = position.width - 270,
                     x = position.x + 60,
-                    y=position.y+5
+                    y=position.y+8
                 };
 
                 Rect typeRect = new Rect(nameTypeRect)
                 {
                     width = position.width - 270,
-                    y = nameTypeRect.y + EditorGUIUtility.singleLineHeight + 7,
+                    y = nameTypeRect.y + EditorGUIUtility.singleLineHeight + 4,
                     height = 20
                 };
+                Rect posRect = new Rect(typeRect)
+                {
+                    width = position.width - 270,
+                    y = typeRect.y + EditorGUIUtility.singleLineHeight + 4,
+                    height = 20
+                };
+                
                 Rect contentRect = new Rect(position)
                 {
                     width = position.width - 140,
-                    height = 50,
+                    height = 64,
                     x = position.x + 140,
-                    y=position.y+5
+                    y=position.y+8
                 };
                 iconProperty = itemData.FindPropertyRelative("icon");
                 SerializedProperty nameProperty = itemData.FindPropertyRelative("name");
                 SerializedProperty contentProperty = itemData.FindPropertyRelative("content");
                 SerializedProperty typeProperty = itemData.FindPropertyRelative("chatType");
+                SerializedProperty posProperty = itemData.FindPropertyRelative("pos");
 
                 iconProperty.objectReferenceValue =
                     EditorGUI.ObjectField(iconRect, iconProperty.objectReferenceValue, typeof(Sprite), false);
@@ -135,10 +154,9 @@ public class DialogNodeEditor : NodeEditor
                 SinglePersonChat temp = dialogNode.chatList[index];
 
                 nameProperty.intValue = EditorGUI.Popup(nameTypeRect, temp.name, dialogNode.singlePersonName.ToArray());
-
-                ChatType ty = new ChatType();
-                ty = (ChatType)EditorGUI.EnumPopup(typeRect, temp.chatType);
-                typeProperty.enumValueIndex = (int)ty;
+                
+                typeProperty.enumValueIndex = (int)(ChatType)EditorGUI.EnumPopup(typeRect, temp.chatType);
+                posProperty.enumValueIndex = (int)(RolePos)EditorGUI.EnumPopup(posRect, temp.pos);
 
                 contentProperty.stringValue = EditorGUI.TextArea(contentRect, contentProperty.stringValue);
             }
@@ -156,13 +174,13 @@ public class DialogNodeEditor : NodeEditor
                 }
                 SerializedProperty itemData = arrayData.GetArrayElementAtIndex(index);
 
-                if (dialogNode.chatList[index].chatType == ChatType.CEvent || dialogNode.chatList[index].chatType == ChatType.GoNext)
+                if (dialogNode.chatList[index].chatType == ChatType.CEvent || dialogNode.chatList[index].chatType == ChatType.Option)
                 {
                     return EditorGUI.GetPropertyHeight(itemData) + 12;
                 }
 
                 //return EditorGUIUtility.singleLineHeight + 36;
-                return EditorGUI.GetPropertyHeight(itemData)+36;
+                return EditorGUI.GetPropertyHeight(itemData)+54;
             }
             else return EditorGUIUtility.singleLineHeight;
         };

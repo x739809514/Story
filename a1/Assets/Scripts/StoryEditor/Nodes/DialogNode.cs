@@ -4,12 +4,11 @@ using XNode;
 
 [CreateNodeMenu("DialogNode")]
 [NodeWidth(400)]
-[NodeTint(73,236,209)]
+[NodeTint(73, 236, 209)]
 public class DialogNode : Node
 {
-    [Input]
-    public Empty input;
-    
+    [Input] public Empty input;
+
     public List<SinglePersonChat> chatList = new List<SinglePersonChat>();
     public List<string> singlePersonName = new List<string>();
 
@@ -18,9 +17,10 @@ public class DialogNode : Node
         return null;
     }
 
-    public Node MoveNext(int chatItemID)
+    public Node MoveNext(int chatItemID, out Current current)
     {
         Node temp = this;
+        current = Current.Dialog;
         for (int i = 0; i < chatList.Count; i++)
         {
             if (i == chatItemID)
@@ -30,9 +30,11 @@ public class DialogNode : Node
                 {
                     case ChatType.Normal:
                         cType = ChatType.Normal;
+                        current = Current.Dialog;
                         break;
                     case ChatType.CEvent:
                         cType = ChatType.CEvent;
+                        current = Current.Dialog;
                         var content = chatList[i].content;
                         EventHandle.DispatchEvent(EventName.EvtDialog, content);
                         break;
@@ -47,6 +49,7 @@ public class DialogNode : Node
                                     if (port.Connection.node is SelectNode node)
                                     {
                                         temp = node;
+                                        current = Current.Select;
                                     }
                                     else
                                     {
@@ -70,6 +73,7 @@ public class DialogNode : Node
                                     if (temp is DialogNode node)
                                     {
                                         temp = node;
+                                        current = Current.Dialog;
                                     }
                                 }
 
@@ -83,7 +87,8 @@ public class DialogNode : Node
                 var bb = chatList[i].content;
                 var head = chatList[i].icon;
                 var character = singlePersonName[chatList[i].name];
-                EventHandle.DispatchEvent(EventName.EvtDialogExecute, cType, bb, head, character);
+                var pos = chatList[i].pos;
+                EventHandle.DispatchEvent<SinglePersonChat,string>(EventName.EvtDialogExecute, chatList[i],character);
                 return temp;
             }
         }

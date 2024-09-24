@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogPersons:
   - charImg: {fileID: 0}
-    name: asd
+    name: "\u67F3\u5AE3\u7136"
   - charImg: {fileID: 0}
-    name: gfh
+    name: "\u5251\u4F8D"
