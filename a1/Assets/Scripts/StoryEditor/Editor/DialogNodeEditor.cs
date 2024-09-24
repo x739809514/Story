@@ -146,12 +146,12 @@ public class DialogNodeEditor : NodeEditor
                 SerializedProperty contentProperty = itemData.FindPropertyRelative("content");
                 SerializedProperty typeProperty = itemData.FindPropertyRelative("chatType");
                 SerializedProperty posProperty = itemData.FindPropertyRelative("pos");
-
-                iconProperty.objectReferenceValue =
-                    EditorGUI.ObjectField(iconRect, iconProperty.objectReferenceValue, typeof(Sprite), false);
-
+                
 
                 SinglePersonChat temp = dialogNode.chatList[index];
+                
+                iconProperty.objectReferenceValue =
+                    EditorGUI.ObjectField(iconRect, iconProperty.objectReferenceValue, typeof(Sprite), false);
 
                 nameProperty.intValue = EditorGUI.Popup(nameTypeRect, temp.name, dialogNode.singlePersonName.ToArray());
                 

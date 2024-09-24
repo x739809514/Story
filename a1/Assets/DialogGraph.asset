@@ -44,11 +44,12 @@ MonoBehaviour:
   - name: 1
     content: option 3
     chatType: 1
-    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
     pos: 1
   singlePersonName:
   - "\u67F3\u5AE3\u7136"
   - "\u5251\u4F8D"
+  singlePersonIcon: []
 --- !u!114 &-3544805841790678263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,15 +204,15 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 1
   chatList:
-  - name: 1
+  - name: 0
     content: hello, how's it going?
     chatType: 1
-    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
     pos: 0
-  - name: 0
+  - name: 1
     content: I am Linda. Do you want to drink sth?
     chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     pos: 1
   - name: 0
     content: I am Linda. Do you want to drink sth?
@@ -221,6 +222,15 @@ MonoBehaviour:
   singlePersonName:
   - "\u67F3\u5AE3\u7136"
   - "\u5251\u4F8D"
+  singlePersonIcon:
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
 --- !u!114 &-1259648757702881791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,11 +275,12 @@ MonoBehaviour:
   - name: 1
     content: option 2
     chatType: 1
-    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
     pos: 1
   singlePersonName:
   - "\u67F3\u5AE3\u7136"
   - "\u5251\u4F8D"
+  singlePersonIcon: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +408,7 @@ MonoBehaviour:
   - name: 0
     content: hello, again
     chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     pos: 1
   - name: 0
     content: hello, again
@@ -407,6 +418,15 @@ MonoBehaviour:
   singlePersonName:
   - "\u67F3\u5AE3\u7136"
   - "\u5251\u4F8D"
+  singlePersonIcon:
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
+  - {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
 --- !u!114 &8642271119856923220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +476,7 @@ MonoBehaviour:
   singlePersonName:
   - "\u67F3\u5AE3\u7136"
   - "\u5251\u4F8D"
+  singlePersonIcon: []
 --- !u!114 &9212318884835560395
 MonoBehaviour:
   m_ObjectHideFlags: 0

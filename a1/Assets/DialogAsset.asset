@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DialogAsset
   m_EditorClassIdentifier: 
   dialogPersons:
-  - charImg: {fileID: 0}
+  - charImg: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
     name: "\u67F3\u5AE3\u7136"
-  - charImg: {fileID: 0}
+  - charImg: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     name: "\u5251\u4F8D"

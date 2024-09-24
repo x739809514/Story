@@ -11,6 +11,5 @@ public class DialogAssets : ScriptableObject
 [Serializable]
 public class Person
 {
-    public Texture charImg;
     public string name;
 }
