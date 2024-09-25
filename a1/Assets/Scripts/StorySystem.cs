@@ -65,6 +65,9 @@ public class StorySystem : MonoBehaviour
                 case Current.Background:
                     PlayBackGroundNode();
                     break;
+                case Current.Audio:
+                    PlayAudioNode();
+                    break;
             }
         }
     }
@@ -85,12 +88,6 @@ public class StorySystem : MonoBehaviour
     {
         if (curNode is StartNode startNode)
         {
-            if (startNode.typeSound != null)
-            {
-                // Add music
-                GameManager.Instance.audioManager.AddTypeMusic("type", startNode.typeSound);
-            }
-
             // execute next node
             curNode = startNode.MoveNext(out current);
         }
@@ -187,6 +184,34 @@ public class StorySystem : MonoBehaviour
         {
             curState = State.Pause;
             Debug.LogError("curNode is not BackGroundNode, curNode is " + curNode.name + " current is " +
+                           nameof(current));
+        }
+    }
+
+    private void PlayAudioNode()
+    {
+        curState = State.Pause;
+        if (curNode is AudioNode audioNode)
+        {
+            for (int i = 0; i < audioNode.soundLists.Count; i++)
+            {
+                var sound = audioNode.soundLists[i];
+                if (sound.clip != null)
+                {
+                    GameManager.audioManager.AddTypeMusic(sound.name, sound.clip, sound.play);
+                }
+                else
+                {
+                    Debug.LogError($"Audio Clip {i} is empty");
+                }
+            }
+
+            curNode = audioNode.MoveNext(out current);
+            curState = State.Play;
+        }
+        else
+        {
+            Debug.LogError("curNode is not AudioNode, curNode is " + curNode.name + " current is " +
                            nameof(current));
         }
     }

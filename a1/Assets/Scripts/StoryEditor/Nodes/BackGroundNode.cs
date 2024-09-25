@@ -45,6 +45,12 @@ public class BackGroundNode : Node
             temp = backGroundNode;
             current = Current.Background;
         }
+
+        if (n is AudioNode audioNode)
+        {
+            temp = audioNode;
+            current = Current.Audio;
+        }
         
         return temp;
     }

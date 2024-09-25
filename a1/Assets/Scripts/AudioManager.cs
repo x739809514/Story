@@ -23,6 +23,10 @@ public class AudioManager
         soundDic.Add(name, source);
     }
 
+    /// <summary>
+    /// name要和节点中填的一样
+    /// </summary>
+    /// <param name="name"></param>
     public void PlaySound(string name)
     {
         if (soundDic.TryGetValue(name, out var sound))

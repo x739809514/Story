@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Current
@@ -8,6 +9,7 @@ public enum Current
     Dialog,
     Select,
     Background,
+    Audio
 }
 
 public enum ChatType
@@ -39,6 +41,14 @@ public enum RolePos
 {
     Left,
     Right
+}
+
+[Serializable]
+public class SoundAsset
+{
+    public string name;
+    public bool play;
+    public AudioClip clip;
 }
 
 [System.Serializable]

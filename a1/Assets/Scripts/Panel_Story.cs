@@ -67,6 +67,7 @@ public class Panel_Story : MonoBehaviour
         var len = content.Length;
         curDialogContent = content;
         StringBuilder sb = new StringBuilder("");
+        GameManager.audioManager.PlaySound("type");
         while (curPos < content.Length)
         {
             yield return typeTime;
@@ -74,7 +75,7 @@ public class Panel_Story : MonoBehaviour
             dialogContent.text = sb.ToString();
             curPos++;
         }
-
+        GameManager.audioManager.StopSound("type");
         dialogContent.text = content;
     }
 
@@ -120,6 +121,7 @@ public class Panel_Story : MonoBehaviour
     {
         StopCoroutine(typeCor);
         dialogContent.text = curDialogContent;
+        GameManager.audioManager.StopSound("type");
     }
 
     private void OnGoNextClick()

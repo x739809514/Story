@@ -79,6 +79,10 @@ public class DialogNode : Node
                                     {
                                         temp = bNode;
                                         current = Current.Background;
+                                    }else if (port.Connection.node is AudioNode aNode)
+                                    {
+                                        temp = aNode;
+                                        current = Current.Audio;
                                     }
                                 }
 

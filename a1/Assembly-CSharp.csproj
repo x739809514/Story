@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\StoryEditor\DialogAssets.cs" />
      <Compile Include="Assets\Scripts\Panel_Story.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Empty.cs" />
+     <Compile Include="Assets\Scripts\StoryEditor\Nodes\AudioNode.cs" />
      <Compile Include="Assets\Scripts\StorySystem.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\BackGroundNode.cs" />

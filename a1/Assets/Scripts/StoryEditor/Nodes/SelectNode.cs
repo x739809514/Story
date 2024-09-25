@@ -42,6 +42,10 @@ public class SelectNode : Node
                     {
                         temp = backGroundNode;
                         current = Current.Background;
+                    }else if (nextNode is AudioNode audioNode)
+                    {
+                        temp = audioNode;
+                        current = Current.Audio;
                     }
                 }
             }

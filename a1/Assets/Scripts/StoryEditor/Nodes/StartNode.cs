@@ -9,7 +9,6 @@ public class StartNode : Node
 {
     [Output] public Empty output;
     
-    public AudioClip typeSound;
     public override object GetValue(NodePort port)
     {
         return null;
