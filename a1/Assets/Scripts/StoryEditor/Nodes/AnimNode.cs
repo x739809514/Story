@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using XNode;
 
-[CreateNodeMenu("AudioNode")]
-[NodeWidth(400)]
-public class AudioNode : Node
+[CreateNodeMenu("AnimNode")]
+[NodeWidth(250)]
+[NodeTint(34, 126, 114)]
+public class AnimNode : Node
 {
     [Input] public Empty input;
     [Output] public Empty output;
-
-    public List<SoundAsset> soundLists;
+    public AnimationClip clip;
 
     public override object GetValue(NodePort port)
     {
@@ -19,12 +18,12 @@ public class AudioNode : Node
     public Node MoveNext(out Current current)
     {
         Node temp = this;
-        current = Current.Audio;
+        current = Current.Animation;
 
-        var exitNode = GetOutputPort("output");
-        if (exitNode.IsConnected)
+        var exitPort = GetOutputPort("output");
+        if (exitPort.IsConnected)
         {
-            var nextNode = exitNode.Connection.node;
+            var nextNode = exitPort.Connection.node;
             if (nextNode is DialogNode dialogNode)
             {
                 temp = dialogNode;

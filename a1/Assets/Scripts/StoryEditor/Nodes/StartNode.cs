@@ -48,6 +48,20 @@ public class StartNode : Node
             current = Current.Background;
             return bNode;
         }
+        
+        AnimNode animNode = temp as AnimNode;
+        if (animNode !=null)
+        {
+            current = Current.Animation;
+            return animNode;
+        }
+        
+        EndNode endNode = temp as EndNode;
+        if (endNode!= null)
+        {
+            current = Current.End;
+            return endNode;
+        }
 
         return temp;
     }

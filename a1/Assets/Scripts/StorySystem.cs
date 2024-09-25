@@ -9,11 +9,12 @@ public class StorySystem : MonoBehaviour
 {
     // Fields
     public static StorySystem Instance;
-    public StoryGraph graph;
+    public List<StoryGraph> graphList;
     private State curState;
     private Current current;
     private Node curNode;
     private int curDialogIndex; // 当前播放到第几段对话
+    private int curGraphIndex;
 
     private float chatSpeed = 0.15f;
     private WaitForSeconds chatTimer;
@@ -25,6 +26,7 @@ public class StorySystem : MonoBehaviour
     public Action<SinglePersonChat, string> updateDialogHandler;
     public Action<List<string>> updateOptionsHandler;
     public Action<Sprite> updateBackgroundHandler;
+    public Action<AnimationClip> updateAnimationHandler;
 
 
 #region life cycle
@@ -44,6 +46,7 @@ public class StorySystem : MonoBehaviour
         EventHandle.AddEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
         EventHandle.AddEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
         EventHandle.AddEvent(EventName.EvtDialogClick, OnDialogClick);
+        EventHandle.AddEvent(EventName.EvtAnimStopClick, OnAnimStopClick);
         InitNode();
     }
 
@@ -68,6 +71,12 @@ public class StorySystem : MonoBehaviour
                 case Current.Audio:
                     PlayAudioNode();
                     break;
+                case Current.Animation:
+                    PlayAnimNode();
+                    break;
+                case Current.End:
+                    PlayEndNode();
+                    break;
             }
         }
     }
@@ -77,6 +86,7 @@ public class StorySystem : MonoBehaviour
         EventHandle.RemoveEvent<SinglePersonChat, string>(EventName.EvtDialogExecute, UpdateDialog);
         EventHandle.RemoveEvent<int>(EventName.EvtOptionClick, OnOptionsClick);
         EventHandle.RemoveEvent(EventName.EvtDialogClick, OnDialogClick);
+        EventHandle.RemoveEvent(EventName.EvtAnimStopClick, OnAnimStopClick);
     }
 
 #endregion
@@ -216,6 +226,28 @@ public class StorySystem : MonoBehaviour
         }
     }
 
+    private void PlayAnimNode()
+    {
+        if (curNode is AnimNode animNode)
+        {
+            updateAnimationHandler?.Invoke(animNode.clip);
+            curState = State.Pause;
+            curNode = animNode.MoveNext(out current);
+        }
+        else
+        {
+            Debug.LogError("curNode is not AnimNode, curNode is " + curNode.name + " current is " +
+                           nameof(current));
+        }
+    }
+
+    private void PlayEndNode()
+    {
+        curGraphIndex++;
+        curState = State.Pause;
+        InitNode();
+    }
+
 #endregion
 
 
@@ -223,6 +255,13 @@ public class StorySystem : MonoBehaviour
 
     private void InitNode()
     {
+        if (curGraphIndex >= graphList.Count)
+        {
+            Debug.Log("It's end");
+            return;
+        }
+
+        var graph = graphList[curGraphIndex];
         foreach (var node in graph.nodes)
         {
             if (node is StartNode n)
@@ -263,6 +302,11 @@ public class StorySystem : MonoBehaviour
             moveToDialogEndHandler?.Invoke();
             toNext = true;
         }
+    }
+
+    private void OnAnimStopClick()
+    {
+        curState = State.Play;
     }
 
 #endregion

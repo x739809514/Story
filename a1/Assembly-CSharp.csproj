@@ -45,6 +45,7 @@
     <Analyzer Include="D:\Unity\2022.3.10f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AnimPlayable.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Datas.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\DialogNode.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\AssetNode.cs" />
@@ -56,11 +57,13 @@
      <Compile Include="Assets\Scripts\StorySystem.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\BackGroundNode.cs" />
+     <Compile Include="Assets\Scripts\StoryEditor\Nodes\AnimNode.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\SelectNode.cs" />
      <Compile Include="Assets\Scripts\EventManager\EventHandle.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\StoryEditor\Nodes\StartNode.cs" />
      <Compile Include="Assets\Scripts\EventManager\EventName.cs" />
+     <Compile Include="Assets\Scripts\StoryEditor\Nodes\EndNode.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -74,6 +77,7 @@
      <Folder Include="Assets\TextMesh Pro\Resources" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <Folder Include="Assets\TextMesh Pro" />
+     <Folder Include="Assets\Resources\anim" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

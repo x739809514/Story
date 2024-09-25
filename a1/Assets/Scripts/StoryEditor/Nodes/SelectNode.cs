@@ -4,12 +4,11 @@ using XNode;
 
 [CreateNodeMenu("OptionNode")]
 [NodeWidth(400)]
-[NodeTint(88,43,142)]
+[NodeTint(88, 43, 142)]
 public class SelectNode : Node
 {
     [Input] public Empty input;
-    [Output(dynamicPortList =true )]
-    public List<string> selections;
+    [Output(dynamicPortList = true)] public List<string> selections;
 
     public override object GetValue(NodePort port)
     {
@@ -42,10 +41,21 @@ public class SelectNode : Node
                     {
                         temp = backGroundNode;
                         current = Current.Background;
-                    }else if (nextNode is AudioNode audioNode)
+                    }
+                    else if (nextNode is AudioNode audioNode)
                     {
                         temp = audioNode;
                         current = Current.Audio;
+                    }
+                    else if (nextNode is AnimNode animNode)
+                    {
+                        temp = animNode;
+                        current = Current.Animation;
+                    }
+                    else if (nextNode is EndNode endNode)
+                    {
+                        temp = endNode;
+                        current = Current.End;
                     }
                 }
             }

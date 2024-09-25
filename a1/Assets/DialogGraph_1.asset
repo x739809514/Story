@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7576029958361134189
+--- !u!114 &-8947677934746443062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,46 +9,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af13d405aad4c668e76932d510484c7, type: 3}
-  m_Name: Dialog
+  m_Script: {fileID: 11500000, guid: fece66a0d447401388a2388d85d01407, type: 3}
+  m_Name: Anim
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1368, y: 312}
+  position: {x: 872, y: -8}
   ports:
     keys:
     - input
-    - chatList 0
+    - output
     values:
     - _fieldName: input
-      _node: {fileID: -7576029958361134189}
+      _node: {fileID: -8947677934746443062}
       _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: selections 2
+      - fieldName: selections 0
         node: {fileID: -3544805841790678263}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: chatList 0
-      _node: {fileID: -7576029958361134189}
-      _typeQualifiedName: SinglePersonChat, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    - _fieldName: output
+      _node: {fileID: -8947677934746443062}
+      _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: input
+        node: {fileID: 3033555670748822257}
+        reroutePoints: []
       _direction: 1
-      _connectionType: 1
+      _connectionType: 0
       _typeConstraint: 0
-      _dynamic: 1
-  chatList:
-  - name: 1
-    content: option 3
-    chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
-    pos: 1
-  singlePersonName:
-  - "\u67F3\u5AE3\u7136"
-  - "\u5251\u4F8D"
+      _dynamic: 0
+  clip: {fileID: 7400000, guid: 0acf6d080fb405a46bdc98763871ae05, type: 2}
 --- !u!114 &-3544805841790678263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,14 +57,13 @@ MonoBehaviour:
   m_Name: Select
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 920, y: -8}
+  position: {x: 344, y: 88}
   ports:
     keys:
     - input
     - selections
     - selections 0
     - selections 1
-    - selections 2
     values:
     - _fieldName: input
       _node: {fileID: -3544805841790678263}
@@ -77,7 +71,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: chatList 2
-        node: {fileID: 7398938691193250723}
+        node: {fileID: -1499977852112862967}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -99,7 +93,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: input
-        node: {fileID: 8642271119856923220}
+        node: {fileID: -8947677934746443062}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -111,28 +105,15 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: input
-        node: {fileID: -1259648757702881791}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: selections 2
-      _node: {fileID: -3544805841790678263}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: -7576029958361134189}
+        node: {fileID: 7398938691193250723}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
   selections:
-  - 1
-  - 2
-  - 3
+  - yes, of course
+  - no, I don't
 --- !u!114 &-1499977852112862967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,10 +163,7 @@ MonoBehaviour:
       _node: {fileID: -1499977852112862967}
       _typeQualifiedName: SinglePersonChat, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: input
-        node: {fileID: 7398938691193250723}
-        reroutePoints: []
+      connections: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 0
@@ -196,7 +174,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: input
-        node: {fileID: 7398938691193250723}
+        node: {fileID: -3544805841790678263}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -206,70 +184,21 @@ MonoBehaviour:
   - name: 0
     content: hello, how's it going?
     chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     pos: 0
-  - name: 1
-    content: I am Linda. Do you want to drink sth?
+  - name: 0
+    content: I am Linda. Do you want to have sth fun?
     chatType: 1
     icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     pos: 1
   - name: 0
     content: I am Linda. Do you want to drink sth?
-    chatType: 4
+    chatType: 3
     icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
     pos: 1
   singlePersonName:
-  - "\u67F3\u5AE3\u7136"
-  - "\u5251\u4F8D"
---- !u!114 &-1259648757702881791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af13d405aad4c668e76932d510484c7, type: 3}
-  m_Name: Dialog
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1368, y: 88}
-  ports:
-    keys:
-    - input
-    - chatList 0
-    values:
-    - _fieldName: input
-      _node: {fileID: -1259648757702881791}
-      _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: selections 1
-        node: {fileID: -3544805841790678263}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: chatList 0
-      _node: {fileID: -1259648757702881791}
-      _typeQualifiedName: SinglePersonChat, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 1
-  chatList:
-  - name: 1
-    content: option 2
-    chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
-    pos: 1
-  singlePersonName:
-  - "\u67F3\u5AE3\u7136"
-  - "\u5251\u4F8D"
+  - Lisa
+  - Linda
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +209,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b101d3c6f5f481b458c893b6897a8a66, type: 3}
-  m_Name: DialogGraph
+  m_Name: DialogGraph_1
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 9212318884835560395}
@@ -288,11 +217,10 @@ MonoBehaviour:
   - {fileID: 5849822831064647218}
   - {fileID: 7398938691193250723}
   - {fileID: -3544805841790678263}
-  - {fileID: 8642271119856923220}
-  - {fileID: -1259648757702881791}
-  - {fileID: -7576029958361134189}
   - {fileID: 1226518694172090775}
   - {fileID: 6989656385611000978}
+  - {fileID: -8947677934746443062}
+  - {fileID: 3033555670748822257}
 --- !u!114 &1226518694172090775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +265,39 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   img: {fileID: 21300000, guid: 1c577551701748f468d7dcd470d3fa85, type: 3}
+--- !u!114 &3033555670748822257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2cd5080e7714d399af387b81ba5a402, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1320, y: 136}
+  ports:
+    keys:
+    - input
+    values:
+    - _fieldName: input
+      _node: {fileID: 3033555670748822257}
+      _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -8947677934746443062}
+        reroutePoints: []
+      - fieldName: chatList 1
+        node: {fileID: 7398938691193250723}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
 --- !u!114 &5849822831064647218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,24 +388,20 @@ MonoBehaviour:
   m_Name: Dialog
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 424, y: -72}
+  position: {x: 808, y: 184}
   ports:
     keys:
     - input
     - chatList 0
     - chatList 1
-    - chatList 2
     values:
     - _fieldName: input
       _node: {fileID: 7398938691193250723}
       _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: chatList 1
-        node: {fileID: -1499977852112862967}
-        reroutePoints: []
-      - fieldName: chatList 2
-        node: {fileID: -1499977852112862967}
+      - fieldName: selections 1
+        node: {fileID: -3544805841790678263}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -463,18 +420,9 @@ MonoBehaviour:
       _node: {fileID: 7398938691193250723}
       _typeQualifiedName: SinglePersonChat, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: chatList 2
-      _node: {fileID: 7398938691193250723}
-      _typeQualifiedName: SinglePersonChat, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
       connections:
       - fieldName: input
-        node: {fileID: -3544805841790678263}
+        node: {fileID: 3033555670748822257}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -482,72 +430,18 @@ MonoBehaviour:
       _dynamic: 1
   chatList:
   - name: 0
-    content: sad
-    chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
-    pos: 1
-  - name: 0
-    content: hello, again
+    content: well, okay... Have a good day~
     chatType: 1
     icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     pos: 1
-  - name: 0
-    content: hello, again
-    chatType: 3
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
+  - name: 1
+    content: well, okay... Have a good day~
+    chatType: 4
+    icon: {fileID: 21300000, guid: 2ffecfd900a40b1478dced66751a9a36, type: 3}
     pos: 1
   singlePersonName:
-  - "\u67F3\u5AE3\u7136"
-  - "\u5251\u4F8D"
---- !u!114 &8642271119856923220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af13d405aad4c668e76932d510484c7, type: 3}
-  m_Name: Dialog
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1368, y: -120}
-  ports:
-    keys:
-    - input
-    - chatList 0
-    values:
-    - _fieldName: input
-      _node: {fileID: 8642271119856923220}
-      _typeQualifiedName: Empty, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: selections 0
-        node: {fileID: -3544805841790678263}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: chatList 0
-      _node: {fileID: 8642271119856923220}
-      _typeQualifiedName: SinglePersonChat, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 1
-  chatList:
-  - name: 0
-    content: option 1
-    chatType: 1
-    icon: {fileID: 21300000, guid: c15e3e9387156bc4cb9609f28ce9001b, type: 3}
-    pos: 0
-  singlePersonName:
-  - "\u67F3\u5AE3\u7136"
-  - "\u5251\u4F8D"
+  - Lisa
+  - Linda
 --- !u!114 &9212318884835560395
 MonoBehaviour:
   m_ObjectHideFlags: 0

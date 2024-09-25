@@ -19,8 +19,7 @@ public class AudioManager
         source.clip = clip;
         source.loop = true;
         source.playOnAwake = play;
-
-        soundDic.Add(name, source);
+        soundDic.TryAdd(name, source);
     }
 
     /// <summary>

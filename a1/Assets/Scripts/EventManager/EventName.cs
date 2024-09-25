@@ -12,5 +12,6 @@
     /// </summary>
     EvtOptionClick,
     
-    EvtDialogClick
+    EvtDialogClick,
+    EvtAnimStopClick
 }

@@ -83,6 +83,14 @@ public class DialogNode : Node
                                     {
                                         temp = aNode;
                                         current = Current.Audio;
+                                    }else if (port.Connection.node is AnimNode animNode)
+                                    {
+                                        temp = animNode;
+                                        current = Current.Animation;
+                                    }else if (port.Connection.node is EndNode endNode)
+                                    {
+                                        temp = endNode;
+                                        current = Current.End;
                                     }
                                 }
 

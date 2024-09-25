@@ -9,7 +9,9 @@ public enum Current
     Dialog,
     Select,
     Background,
-    Audio
+    Audio,
+    Animation,
+    End
 }
 
 public enum ChatType

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -17,14 +16,17 @@ public class Panel_Story : MonoBehaviour
     public TextMeshProUGUI nameRight;
     public TextMeshProUGUI dialogContent;
     public Transform optionsParent;
-
-    public Transform gameManager;
+    public Transform animParent;
+    public Transform content;
+    public Transform anim;
+    public Button btnAnimStop;
 
     private float typeSpeed = 0.1f;
     private WaitForSeconds typeTime;
     private List<GameObject> optionList;
     private Coroutine typeCor;
     private string curDialogContent;
+    private AnimPlayable animPlayable;
 
     private void Start()
     {
@@ -32,11 +34,14 @@ public class Panel_Story : MonoBehaviour
         StorySystem.Instance.updateDialogHandler += UpdateDialog;
         StorySystem.Instance.updateOptionsHandler += UpdateOptions;
         StorySystem.Instance.updateBackgroundHandler += UpdateBackgroundImg;
+        StorySystem.Instance.updateAnimationHandler += UpdateAnim;
         btnNext.onClick.AddListener(OnGoNextClick);
+        btnAnimStop.onClick.AddListener(OnAnimStopClick);
     }
 
     private void UpdateDialog(SinglePersonChat data, string personName)
     {
+        content.gameObject.SetActive(true);
         var pos = data.pos;
         roleLeft.gameObject.SetActive(false);
         roleRight.gameObject.SetActive(false);
@@ -47,6 +52,7 @@ public class Panel_Story : MonoBehaviour
             roleLeft.gameObject.SetActive(true);
             nameLeft.gameObject.SetActive(true);
             roleLeft.sprite = data.icon;
+            roleLeft.SetNativeSize();
             nameLeft.text = personName;
         }
         else if (pos == RolePos.Right)
@@ -54,6 +60,7 @@ public class Panel_Story : MonoBehaviour
             roleRight.gameObject.SetActive(true);
             nameRight.gameObject.SetActive(true);
             roleRight.sprite = data.icon;
+            roleRight.SetNativeSize();
             nameRight.text = personName;
         }
 
@@ -75,6 +82,7 @@ public class Panel_Story : MonoBehaviour
             dialogContent.text = sb.ToString();
             curPos++;
         }
+
         GameManager.audioManager.StopSound("type");
         dialogContent.text = content;
     }
@@ -117,9 +125,25 @@ public class Panel_Story : MonoBehaviour
         bgImg.sprite = sprite;
     }
 
+    private void UpdateAnim(AnimationClip clip)
+    {
+        btnNext.interactable = false;
+        bgImg.gameObject.SetActive(false);
+        content.gameObject.SetActive(false);
+        btnAnimStop.gameObject.SetActive(true);
+        anim.gameObject.SetActive(true);
+        var animator = animParent.GetComponent<Animator>();
+        animPlayable = new AnimPlayable(clip, animator);
+        animPlayable.PlayAnim();
+    }
+
     private void DoMoveToDialogEnd()
     {
-        StopCoroutine(typeCor);
+        if (typeCor != null)
+        {
+            StopCoroutine(typeCor);
+        }
+
         dialogContent.text = curDialogContent;
         GameManager.audioManager.StopSound("type");
     }
@@ -127,6 +151,17 @@ public class Panel_Story : MonoBehaviour
     private void OnGoNextClick()
     {
         EventHandle.DispatchEvent(EventName.EvtDialogClick);
+    }
+
+    private void OnAnimStopClick()
+    {
+        btnNext.interactable = true;
+        bgImg.gameObject.SetActive(true);
+        content.gameObject.SetActive(true);
+        btnAnimStop.gameObject.SetActive(false);
+        anim.gameObject.SetActive(false);
+        animPlayable.StopAnim();
+        EventHandle.DispatchEvent(EventName.EvtAnimStopClick);
     }
 
     private void OnDestroy()

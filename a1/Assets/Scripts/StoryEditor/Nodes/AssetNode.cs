@@ -1,5 +1,6 @@
 ﻿using XNode;
 
+[CreateNodeMenu("AssetNode")]
 public class AssetNode : Node
 {
     public DialogAssets dialogAssets;
