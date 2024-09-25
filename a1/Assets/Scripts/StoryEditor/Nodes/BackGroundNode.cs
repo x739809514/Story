@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 using XNode;
 
 [CreateNodeMenu("BackgroundNode")]
@@ -9,7 +8,6 @@ public class BackGroundNode : Node
 {
     [Input] public Empty input;
     [Output] public Empty output;
-    public AudioClip bgm;
     public Sprite img;
 
     public override object GetValue(NodePort port)

@@ -3,24 +3,47 @@ using UnityEngine;
 
 public class AudioManager
 {
-    private AudioSource typeSource;
     private GameObject targetObj;
+    private Dictionary<string, AudioSource> soundDic;
 
     public AudioManager(GameObject obj)
     {
         targetObj = obj;
     }
 
-    public void AddTypeMusic(AudioClip clip)
+    public void AddTypeMusic(string name, AudioClip clip, bool play = false)
     {
-        typeSource = targetObj.AddComponent<AudioSource>();
-        typeSource.clip = clip;
-        typeSource.loop = true;
+        soundDic ??= new Dictionary<string, AudioSource>();
+
+        var source = targetObj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.loop = true;
+        source.playOnAwake = play;
+
+        soundDic.Add(name, source);
     }
 
-    public void StopTypeMusic()
+    public void PlaySound(string name)
     {
-        typeSource.Stop();
+        if (soundDic.TryGetValue(name, out var sound))
+        {
+            sound.Play();
+        }
+        else
+        {
+            Debug.LogError("Play error, No specific sound");
+        }
     }
 
+    public void StopSound(string name)
+    {
+        if (soundDic.TryGetValue(name, out var sound))
+        {
+            sound.Stop();
+        }
+        else
+        {
+            Debug.LogError("Stop error, No specific sound");
+        }
+    }
 }

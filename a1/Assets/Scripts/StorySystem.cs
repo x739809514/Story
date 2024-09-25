@@ -24,7 +24,7 @@ public class StorySystem : MonoBehaviour
     public Action moveToDialogEndHandler;
     public Action<SinglePersonChat, string> updateDialogHandler;
     public Action<List<string>> updateOptionsHandler;
-    public Action<Sprite, AudioClip> updateBackgroundHandler;
+    public Action<Sprite> updateBackgroundHandler;
 
 
 #region life cycle
@@ -88,7 +88,7 @@ public class StorySystem : MonoBehaviour
             if (startNode.typeSound != null)
             {
                 // Add music
-                GameManager.Instance.audioManager.AddTypeMusic(startNode.typeSound);
+                GameManager.Instance.audioManager.AddTypeMusic("type", startNode.typeSound);
             }
 
             // execute next node
@@ -112,7 +112,7 @@ public class StorySystem : MonoBehaviour
         }
 
         curNode = dialogNode.MoveNext(index, out current);
-        
+
         if (index == dialogNode.chatList.Count - 1)
         {
             curDialogIndex = 0;
@@ -179,7 +179,7 @@ public class StorySystem : MonoBehaviour
     {
         if (curNode is BackGroundNode backGroundNode)
         {
-            updateBackgroundHandler?.Invoke(backGroundNode.img, backGroundNode.bgm);
+            updateBackgroundHandler?.Invoke(backGroundNode.img);
             // execute next node
             curNode = backGroundNode.MoveNext(out current);
         }

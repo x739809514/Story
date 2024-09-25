@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -25,11 +26,12 @@ public class Panel_Story : MonoBehaviour
     private Coroutine typeCor;
     private string curDialogContent;
 
-    private void Awake()
+    private void Start()
     {
         StorySystem.Instance.moveToDialogEndHandler += DoMoveToDialogEnd;
         StorySystem.Instance.updateDialogHandler += UpdateDialog;
         StorySystem.Instance.updateOptionsHandler += UpdateOptions;
+        StorySystem.Instance.updateBackgroundHandler += UpdateBackgroundImg;
         btnNext.onClick.AddListener(OnGoNextClick);
     }
 
@@ -109,6 +111,11 @@ public class Panel_Story : MonoBehaviour
         EventHandle.DispatchEvent<int>(EventName.EvtOptionClick, index);
     }
 
+    private void UpdateBackgroundImg(Sprite sprite)
+    {
+        bgImg.sprite = sprite;
+    }
+
     private void DoMoveToDialogEnd()
     {
         StopCoroutine(typeCor);
@@ -125,6 +132,7 @@ public class Panel_Story : MonoBehaviour
         StorySystem.Instance.moveToDialogEndHandler -= DoMoveToDialogEnd;
         StorySystem.Instance.updateDialogHandler -= UpdateDialog;
         StorySystem.Instance.updateOptionsHandler -= UpdateOptions;
+        StorySystem.Instance.updateBackgroundHandler -= UpdateBackgroundImg;
         btnNext.onClick.RemoveAllListeners();
     }
 }
