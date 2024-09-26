@@ -238,7 +238,7 @@ Animator:
   m_GameObject: {fileID: 392444191}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c2676ace2ab5ba440ac8a5945e2b935e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -290,15 +290,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 888188549, guid: 0b0b01699b4ff5947bc48b9b5a3cc508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 2.88}
+  m_Size: {x: 38, y: 37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &705507993
@@ -601,11 +601,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 32687481456392180, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 159.0833
       objectReference: {fileID: 0}
     - target: {fileID: 32687481456392180, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 48.4295
+      value: 51.121
       objectReference: {fileID: 0}
     - target: {fileID: 32687481456392180, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -613,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 32687481456392180, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 105.06138
+      value: 103.72
       objectReference: {fileID: 0}
     - target: {fileID: 255129240250725982, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_fontSize
@@ -678,6 +678,10 @@ PrefabInstance:
     - target: {fileID: 1001030573230642847, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001030573230642847, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1234000320107222782, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: anim
@@ -865,19 +869,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6583592106623816858, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 122.75
+      value: 177.4828
       objectReference: {fileID: 0}
     - target: {fileID: 6583592106623816858, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 56.8418
+      value: 51.126
       objectReference: {fileID: 0}
     - target: {fileID: 6583592106623816858, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -60.4
+      value: -58.4
       objectReference: {fileID: 0}
     - target: {fileID: 6583592106623816858, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100.86
+      value: 103.72
       objectReference: {fileID: 0}
     - target: {fileID: 8132955507099946705, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_Pivot.x
@@ -1020,6 +1024,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8578374170312266663, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578374170312266663, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
       propertyPath: m_fontSizeMax
       value: 50
       objectReference: {fileID: 0}
@@ -1043,7 +1051,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5210842905455483464, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
+    - {fileID: 3446447123437950816, guid: 90ac4014210b64d4ca07804bb49632dd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

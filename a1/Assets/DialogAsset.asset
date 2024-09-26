@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DialogAsset
   m_EditorClassIdentifier: 
   dialogPersons:
-  - name: Lisa
-  - name: Linda
+  - name: Dante
+  - name: Constantine
